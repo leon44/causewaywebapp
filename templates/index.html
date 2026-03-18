@@ -52,6 +52,10 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
+        .app-banner.hidden {
+            display: none;
+        }
+        
         .app-banner a {
             color: white;
             text-decoration: underline;
@@ -284,7 +288,7 @@
     </style>
 </head>
 <body>
-    <div class="app-banner">
+    <div class="app-banner" id="app-banner">
         📱 Get the full <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" target="_blank">iOS app</a> for offline access & notifications
     </div>
     
@@ -299,6 +303,21 @@
     </div>
     
     <script>
+        // Hide app banner for Safari iOS only (iOS Smart App Banner will show instead)
+        // Keep banner for Chrome iOS and other browsers
+        (function() {
+            const userAgent = navigator.userAgent;
+            const isIOS = /iPhone|iPad|iPod/.test(userAgent);
+            const isSafari = /Safari/.test(userAgent) && !/CriOS|Chrome/.test(userAgent);
+            
+            if (isIOS && isSafari) {
+                const banner = document.getElementById('app-banner');
+                if (banner) {
+                    banner.classList.add('hidden');
+                }
+            }
+        })();
+        
         let countdownInterval;
         
         function formatTime(date) {
