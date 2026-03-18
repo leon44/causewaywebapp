@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Island Causeway - Live Tide Times & Status | Lindisfarne</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Live Holy Island causeway crossing times and tide information for Lindisfarne. Check if the causeway is open or closed right now with real-time countdown timer.">
+    <meta name="keywords" content="Holy Island tide times, Lindisfarne crossing times, Holy Island causeway, causeway crossing times, Lindisfarne tide times, Holy Island safe crossing, Northumberland causeway">
+    <meta name="author" content="Holy Island Crossing Times">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Holy Island Causeway - Live Crossing Times">
+    <meta property="og:description" content="Check if the Holy Island causeway is open or closed right now. Live tide times for safe crossing to Lindisfarne.">
+    <meta property="og:type" content="website">
+    
+    <!-- Mobile Optimization -->
+    <meta name="theme-color" content="#34C759">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .app-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .app-banner a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #1d1d1f;
+        }
+        
+        .status-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .status-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .status-circle.open {
+            background: #34C759;
+        }
+        
+        .status-circle.closed {
+            background: #FF3B30;
+        }
+        
+        .status-label {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .countdown {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .next-window {
+            font-size: 14px;
+            color: #86868b;
+            margin-top: 10px;
+        }
+        
+        .next-window strong {
+            color: #1d1d1f;
+        }
+        
+        .upcoming-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .upcoming-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+        }
+        
+        .day-label {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .timeline-container {
+            margin-bottom: 20px;
+        }
+        
+        .timeline-bar {
+            height: 40px;
+            background: #f5f5f7;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            position: relative;
+            display: flex;
+        }
+        
+        .timeline-segment {
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-segment.open {
+            background: #34C759;
+        }
+        
+        .timeline-segment.closed {
+            background: #FF3B30;
+        }
+        
+        .timeline-times {
+            position: relative;
+            height: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .timeline-time {
+            position: absolute;
+            font-size: 11px;
+            color: #86868b;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        
+        .cta-button {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .cta-button:active {
+            transform: translateY(0);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #86868b;
+            font-size: 13px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #86868b;
+        }
+        
+        @media (max-width: 480px) {
+            .status-circle {
+                width: 180px;
+                height: 180px;
+                font-size: 28px;
+            }
+            
+            .countdown {
+                font-size: 40px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-banner">
+        📱 Get the full <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" target="_blank">iOS app</a> for offline access & notifications
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Holy Island Causeway</h1>
+        </header>
+        
+        <div id="app" class="loading">
+            Loading tide information...
+        </div>
+    </div>
+    
+    <script>
+        let countdownInterval;
+        
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-GB', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: false,
+                timeZone: 'Europe/London'
+            });
+        }
+        
+        function formatTimeRange(start, end) {
+            return `${formatTime(start)} - ${formatTime(end)}`;
+        }
+        
+        function calculateCountdown(targetTime) {
+            const now = new Date();
+            const target = new Date(targetTime);
+            const diff = target - now;
+            
+            if (diff <= 0) {
+                return '0h 0m 0s';
+            }
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            return `${hours}h ${minutes}m ${seconds}s`;
+        }
+        
+        function createTimelineBar(events) {
+            if (!events || events.length === 0) return { bar: '', times: '' };
+            
+            const dayStart = new Date(events[0].timestamp);
+            dayStart.setHours(0, 0, 0, 0);
+            const dayEnd = new Date(dayStart);
+            dayEnd.setHours(23, 59, 59, 999);
+            
+            const totalMs = dayEnd - dayStart;
+            let barHtml = '';
+            let timesHtml = '<div class="timeline-times">';
+            let lastTime = dayStart;
+            let cumulativePercent = 0;
+            
+            // Determine initial status at midnight (opposite of first event)
+            let currentStatus = events[0].status === 'OPEN' ? 'CLOSED' : 'OPEN';
+            
+            for (let i = 0; i < events.length; i++) {
+                const event = events[i];
+                const eventTime = new Date(event.timestamp);
+                const segmentMs = eventTime - lastTime;
+                const widthPercent = (segmentMs / totalMs) * 100;
+                
+                // Only draw segment if it has width
+                if (widthPercent > 0) {
+                    barHtml += `<div class="timeline-segment ${currentStatus.toLowerCase()}" style="width: ${widthPercent}%"></div>`;
+                }
+                
+                cumulativePercent += widthPercent;
+                timesHtml += `<span class="timeline-time" style="left: ${cumulativePercent}%">${formatTime(eventTime)}</span>`;
+                
+                lastTime = eventTime;
+                currentStatus = event.status;
+            }
+            
+            const finalSegmentMs = dayEnd - lastTime;
+            const finalWidthPercent = (finalSegmentMs / totalMs) * 100;
+            if (finalWidthPercent > 0) {
+                barHtml += `<div class="timeline-segment ${currentStatus.toLowerCase()}" style="width: ${finalWidthPercent}%"></div>`;
+            }
+            
+            timesHtml += '</div>';
+            
+            return { bar: barHtml, times: timesHtml };
+        }
+        
+        function updateUI(data) {
+            const isOpen = data.current_status === 'OPEN';
+            const nextEvent = data.next_event;
+            const nextNextEvent = data.next_next_event;
+            
+            const statusText = isOpen ? 'OPEN' : 'CLOSED';
+            const actionText = isOpen ? 'Closes in' : 'Opens in';
+            
+            let nextWindowText = '';
+            if (nextEvent && nextNextEvent) {
+                const nextTime = new Date(nextEvent.timestamp);
+                const nextNextTime = new Date(nextNextEvent.timestamp);
+                nextWindowText = `Next ${nextEvent.status === 'CLOSED' ? 'Closed' : 'Open'} Window: ${formatTimeRange(nextTime, nextNextTime)}`;
+            }
+            
+            const todayTimeline = createTimelineBar(data.today_events);
+            const tomorrowTimeline = createTimelineBar(data.tomorrow_events);
+            
+            const html = `
+                <div class="status-container">
+                    <div class="status-circle ${isOpen ? 'open' : 'closed'}">
+                        ${statusText}
+                    </div>
+                    <div class="status-label">${actionText}</div>
+                    <div class="countdown" id="countdown">
+                        ${calculateCountdown(nextEvent.timestamp)}
+                    </div>
+                    ${nextWindowText ? `<div class="next-window">${nextWindowText}</div>` : ''}
+                </div>
+                
+                <div class="upcoming-section">
+                    <div class="upcoming-title">Upcoming Days</div>
+                    <div class="day-label">Today</div>
+                    <div class="timeline-bar">
+                        ${todayTimeline.bar}
+                    </div>
+                    ${todayTimeline.times}
+                    ${tomorrowTimeline.bar ? `
+                        <div class="day-label">Tomorrow</div>
+                        <div class="timeline-bar">
+                            ${tomorrowTimeline.bar}
+                        </div>
+                        ${tomorrowTimeline.times}
+                    ` : ''}
+                </div>
+                
+                <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" class="cta-button" target="_blank">
+                    📱 Download the offline app before you go<br>
+                    <small style="font-weight: 400; font-size: 14px;">Get offline notifications and view dates up to 2030</small>
+                </a>
+            `;
+            
+            document.getElementById('app').innerHTML = html;
+            
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            
+            countdownInterval = setInterval(() => {
+                const countdownEl = document.getElementById('countdown');
+                if (countdownEl && nextEvent) {
+                    countdownEl.textContent = calculateCountdown(nextEvent.timestamp);
+                    
+                    if (new Date() >= new Date(nextEvent.timestamp)) {
+                        fetchStatus();
+                    }
+                }
+            }, 1000);
+        }
+        
+        async function fetchStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                updateUI(data);
+            } catch (error) {
+                console.error('Error fetching status:', error);
+                document.getElementById('app').innerHTML = '<div class="loading">Error loading tide information. Please refresh the page.</div>';
+            }
+        }
+        
+        fetchStatus();
+        setInterval(fetchStatus, 60000);
+    </script>
+    
+    <footer>
+        <p style="font-weight: 600; margin-bottom: 16px;">Holy Island Causeway Tide Times</p>
+        
+        <p style="margin-bottom: 12px;">All times are displayed in UK (London) time zone, regardless of your device's location settings.</p>
+        
+        <p style="margin-bottom: 12px;">Indicated times are for driving across the causeway by car, which takes around 10 minutes.</p>
+        
+        <p style="margin-bottom: 12px;">Times are based on official data from Northumberland County Council. Always exercise caution when crossing the causeway.</p>
+        
+        <p style="margin-bottom: 12px;">This app provides safe crossing times based on tide predictions only. Weather conditions including high winds, heavy rain, fog, or storms can significantly affect the safety of crossing even during published safe times. Never attempt to cross if conditions appear dangerous, regardless of tide times. Always check current weather forecasts and observe local conditions before crossing.</p>
+        
+        <p style="margin-bottom: 16px;">In an emergency, call 999 immediately.</p>
+    </footer>
+</body>
+</html>
