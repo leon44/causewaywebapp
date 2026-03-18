@@ -91,6 +91,11 @@ def privacy():
     """Serve the privacy policy page"""
     return render_template('privacy.html')
 
+@app.route('/support')
+def support():
+    """Serve the support page"""
+    return render_template('support.html')
+
 @app.route('/api/status')
 def api_status():
     """API endpoint for current status"""
