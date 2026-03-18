@@ -232,6 +232,27 @@
             transform: translateY(0);
         }
         
+        .external-link {
+            display: block;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 14px;
+            text-align: center;
+            margin: 15px 0 20px 0;
+            border: 2px solid #667eea;
+            transition: all 0.2s ease;
+        }
+        
+        .external-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-1px);
+        }
+        
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -399,6 +420,10 @@
                         </div>
                         ${tomorrowTimeline.times}
                     ` : ''}
+                    
+                    <a href="https://holyislandcrossingtimes.northumberland.gov.uk/" class="external-link" target="_blank" rel="noopener noreferrer">
+                        All Crossing Times from Northumberland County Council →
+                    </a>
                 </div>
                 
                 <div class="disclaimer">
