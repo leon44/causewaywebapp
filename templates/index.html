@@ -68,9 +68,15 @@
             padding: 20px;
         }
         
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 12px;
+            }
+        }
+        
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             padding-top: 20px;
         }
         
@@ -282,7 +288,11 @@
             }
             
             h1 {
-                font-size: 24px;
+                font-size: 22px;
+            }
+            
+            header {
+                margin-bottom: 15px;
             }
         }
     </style>
@@ -294,7 +304,7 @@
     
     <div class="container">
         <header>
-            <h1>Holy Island Causeway</h1>
+            <h1>Holy Island Causeway Live Status and Future Times</h1>
         </header>
         
         <div id="app" class="loading">
