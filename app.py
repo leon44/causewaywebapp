@@ -96,6 +96,11 @@ def support():
     """Serve the support page"""
     return render_template('support.html')
 
+@app.route('/about')
+def about():
+    """Serve the about page"""
+    return render_template('about.html')
+
 @app.route('/api/status')
 def api_status():
     """API endpoint for current status"""
