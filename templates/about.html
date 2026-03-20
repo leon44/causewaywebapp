@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Developer - Holy Island Causeway</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="About the developer of the Holy Island Causeway tide times app. Learn about the meteorologist behind this useful crossing tool.">
+    <meta name="keywords" content="Holy Island developer, meteorologist, Lindisfarne app developer, tide times app creator">
+    
+    <!-- Mobile Optimization -->
+    <meta name="theme-color" content="#34C759">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 12px;
+            }
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            color: #86868b;
+            margin-bottom: 0;
+        }
+        
+        .about-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .developer-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .about-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #1d1d1f;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .about-text strong {
+            color: #1d1d1f;
+            font-weight: 600;
+        }
+        
+        .back-link {
+            display: block;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 14px;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid #667eea;
+            transition: all 0.2s ease;
+        }
+        
+        .back-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #86868b;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 480px) {
+            .developer-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .about-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>About the Developer</h1>
+            <p class="subtitle">The story behind the Holy Island Causeway app</p>
+        </header>
+        
+        <div class="about-container">
+            <img src="{{ url_for('static', filename='developer.jpg') }}" alt="Developer" class="developer-image">
+            
+            <div class="about-text">
+                <p>
+                    I'm a Meteorologist working as a Meteorological product manager, and one of our specialized products is <strong>tidal data and tidal modelling</strong>. This professional background gives me unique insight into the complex patterns of tides and coastal conditions that affect the Holy Island causeway.
+                </p>
+                
+                <p>
+                    I have a vested interest in the island as my family owns <strong>three hotels</strong> on Holy Island - the Manor House, the Ship, and the Lindisfarne Inn. Being from the local area, I understand firsthand how important safe crossing times are to both residents and visitors.
+                </p>
+                
+                <p>
+                    Through our hotel guests, I've seen firsthand the <strong>confusion and fear</strong> many people experience when trying to understand how the causeway works. Many visitors are anxious about getting stranded or missing their crossing, which can detract from their experience of this beautiful island.
+                </p>
+                
+                <p>
+                    That's why I created this app - to make crossing the causeway <strong>easier and simpler</strong> for everyone. By providing clear, real-time information about tide times and crossing status, I hope to reduce the stress and uncertainty that many people feel, allowing them to enjoy their visit to Holy Island with confidence.
+                </p>
+            </div>
+        </div>
+        
+        <a href="/" class="back-link">← Back to Causeway Status</a>
+    </div>
+    
+    <footer>
+        <p style="font-size: 12px;">
+            <a href="/privacy" style="color: #667eea; text-decoration: none; margin-right: 15px;">Privacy Policy</a>
+            <a href="/support" style="color: #667eea; text-decoration: none;">Support</a>
+        </p>
+    </footer>
+</body>
+</html>
