@@ -394,12 +394,24 @@
                 navigator.serviceWorker.register('/static/sw.js')
                     .then(registration => {
                         console.log('SW registered: ', registration);
+                        console.log('SW scope: ', registration.scope);
                     })
                     .catch(registrationError => {
                         console.log('SW registration failed: ', registrationError);
                     });
             });
         }
+        
+        // Handle PWA install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('Install prompt ready');
+            
+            // Show install button or banner here if desired
+            // For now, let Chrome handle the automatic prompt
+        });
         
         // Detect Android and iOS devices
         (function() {
