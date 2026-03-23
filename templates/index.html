@@ -86,18 +86,30 @@
         
         /* Android-specific optimizations */
         .android .container {
-            padding: 20px 0;
+            padding: 0;
             max-width: 100%;
+        }
+        
+        .android header {
+            padding: 20px 15px;
         }
         
         .android .status-container,
         .android .upcoming-section {
-            margin-left: 15px;
-            margin-right: 15px;
+            margin: 0 15px 20px 15px;
+            border-radius: 15px;
+        }
+        
+        .android .status-container {
+            margin-bottom: 15px;
         }
         
         .android .cta-button.ios-only {
             display: none;
+        }
+        
+        .android footer {
+            padding: 20px 15px;
         }
         
         header {
@@ -334,6 +346,14 @@
             .android .upcoming-section {
                 margin-left: 10px;
                 margin-right: 10px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .android .status-container,
+            .android .upcoming-section {
+                margin-left: 8px;
+                margin-right: 8px;
             }
         }
     </style>
