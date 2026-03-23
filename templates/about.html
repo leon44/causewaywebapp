@@ -45,6 +45,26 @@
             }
         }
         
+        /* Android-specific optimizations */
+        .android .container {
+            padding: 20px 0;
+            max-width: 100%;
+        }
+        
+        .android .about-container {
+            border-radius: 0;
+            padding: 30px 15px;
+            margin: 0 15px;
+        }
+        
+        .android header {
+            padding: 20px 15px;
+        }
+        
+        .android footer {
+            padding: 20px 15px;
+        }
+        
         header {
             text-align: center;
             margin-bottom: 30px;
@@ -140,9 +160,45 @@
                 padding: 30px 20px;
             }
         }
+        
+        /* Android-specific optimizations */
+        .android .container {
+            padding: 0;
+            max-width: 100%;
+        }
+        
+        .android .about-container {
+            border-radius: 0;
+            padding: 30px 15px;
+            margin: 0;
+        }
+        
+        .android header {
+            padding: 20px 15px;
+        }
+        
+        .android footer {
+            padding: 20px 15px;
+        }
     </style>
 </head>
 <body>
+    <script>
+        // Detect Android devices
+        (function() {
+            const userAgent = navigator.userAgent;
+            const isAndroid = /Android/.test(userAgent);
+            
+            if (isAndroid) {
+                document.body.classList.add('android');
+                // Hide iOS Smart App Banner on Android
+                const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
+                if (metaTag) {
+                    metaTag.remove();
+                }
+            }
+        })();
+    </script>
     <div class="container">
         <header>
             <h1>About the Developer</h1>

@@ -84,6 +84,22 @@
             }
         }
         
+        /* Android-specific optimizations */
+        .android .container {
+            padding: 20px 0;
+            max-width: 100%;
+        }
+        
+        .android .status-container,
+        .android .upcoming-section {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+        
+        .android .cta-button.ios-only {
+            display: none;
+        }
+        
         header {
             text-align: center;
             margin-bottom: 20px;
@@ -312,6 +328,14 @@
                 margin-bottom: 15px;
             }
         }
+        
+        @media (max-width: 480px) {
+            .android .status-container,
+            .android .upcoming-section {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -327,14 +351,23 @@
     </div>
     
     <script>
-        // Hide app banner for Safari iOS only (iOS Smart App Banner will show instead)
-        // Keep banner for Chrome iOS and other browsers
+        // Detect Android and iOS devices
         (function() {
             const userAgent = navigator.userAgent;
+            const isAndroid = /Android/.test(userAgent);
             const isIOS = /iPhone|iPad|iPod/.test(userAgent);
             const isSafari = /Safari/.test(userAgent) && !/CriOS|Chrome/.test(userAgent);
             
-            if (isIOS && isSafari) {
+            if (isAndroid) {
+                document.body.classList.add('android');
+                // Hide iOS Smart App Banner on Android
+                const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
+                if (metaTag) {
+                    metaTag.remove();
+                }
+            } else if (isIOS && isSafari) {
+                // Keep banner for Safari iOS only (iOS Smart App Banner will show instead)
+                // Keep banner for Chrome iOS and other browsers
                 const banner = document.getElementById('app-banner');
                 if (banner) {
                     banner.classList.add('hidden');
@@ -464,7 +497,7 @@
                         ${tomorrowTimeline.times}
                     ` : ''}
                     
-                    <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" class="cta-button" target="_blank">
+                    <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" class="cta-button ios-only" target="_blank">
                         📱 Offline app for all future dates and notifications
                     </a>
                     
