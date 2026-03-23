@@ -27,6 +27,9 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.png') }}">
     
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-02F96VK0LG"></script>
     <script>
@@ -88,28 +91,58 @@
         .android .container {
             padding: 0;
             max-width: 100%;
+            background: white;
+            min-height: 100vh;
         }
         
         .android header {
             padding: 20px 15px;
-        }
-        
-        .android .status-container,
-        .android .upcoming-section {
-            margin: 0 15px 20px 15px;
-            border-radius: 15px;
+            background: white;
         }
         
         .android .status-container {
-            margin-bottom: 15px;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+            margin: 0;
+            padding: 0 15px 30px 15px;
+            border-bottom: 1px solid #e5e5e7;
+        }
+        
+        .android .upcoming-section {
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+            margin: 0;
+            padding: 30px 15px;
+            border-bottom: 1px solid #e5e5e7;
+        }
+        
+        .android .disclaimer {
+            background: transparent;
+            border-left: none;
+            border-radius: 0;
+            margin: 0;
+            padding: 20px 15px;
+            background: #fff3cd;
+            border-bottom: 1px solid #e5e5e7;
         }
         
         .android .cta-button.ios-only {
             display: none;
         }
         
+        .android .android-hidden {
+            display: none;
+        }
+        
         .android footer {
             padding: 20px 15px;
+            background: white;
+        }
+        
+        .android body {
+            background: white;
         }
         
         header {
@@ -340,22 +373,6 @@
                 margin-bottom: 15px;
             }
         }
-        
-        @media (max-width: 480px) {
-            .android .status-container,
-            .android .upcoming-section {
-                margin-left: 10px;
-                margin-right: 10px;
-            }
-        }
-        
-        @media (max-width: 380px) {
-            .android .status-container,
-            .android .upcoming-section {
-                margin-left: 8px;
-                margin-right: 8px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -371,6 +388,19 @@
     </div>
     
     <script>
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/static/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+        
         // Detect Android and iOS devices
         (function() {
             const userAgent = navigator.userAgent;
@@ -525,7 +555,7 @@
                         All Crossing Times from Northumberland County Council →
                     </a>
                     
-                    <a href="https://holy-island.uk/crossing-holy-islands-causeway-and-what-you-need-to-know/" class="external-link" target="_blank" rel="noopener noreferrer">
+                    <a href="https://holy-island.uk/crossing-holy-islands-causeway-and-what-you-need-to-know/" class="external-link android-hidden" target="_blank" rel="noopener noreferrer">
                         General Causeway Info →
                     </a>
                 </div>
