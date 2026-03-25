@@ -418,6 +418,16 @@
             // Store the event for manual button if needed
             deferredPrompt = e;
             console.log('Install prompt ready - Chrome should show native banner');
+            
+            // Show manual install button for Android as backup
+            const isAndroid = /Android/.test(navigator.userAgent);
+            if (isAndroid) {
+                const installBtn = document.getElementById('install-btn');
+                if (installBtn) {
+                    installBtn.style.display = 'block';
+                    console.log('Showing manual install button for Android');
+                }
+            }
         });
         
         // Handle manual install button click
