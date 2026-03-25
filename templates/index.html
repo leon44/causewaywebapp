@@ -385,6 +385,11 @@
         <div id="app" class="loading">
             Loading tide information...
         </div>
+        
+        <!-- Manual PWA Install Button (hidden by default) -->
+        <button id="install-btn" style="display: none; position: fixed; bottom: 20px; right: 20px; background: #34C759; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);">
+            Install App
+        </button>
     </div>
     
     <script>
@@ -395,11 +400,15 @@
                     .then(registration => {
                         console.log('SW registered: ', registration);
                         console.log('SW scope: ', registration.scope);
+                        console.log('SW active: ', registration.active);
+                        console.log('SW installing: ', registration.installing);
                     })
                     .catch(registrationError => {
                         console.log('SW registration failed: ', registrationError);
                     });
             });
+        } else {
+            console.log('Service Worker not supported');
         }
         
         // Handle PWA install prompt
@@ -409,8 +418,32 @@
             deferredPrompt = e;
             console.log('Install prompt ready');
             
-            // Show install button or banner here if desired
-            // For now, let Chrome handle the automatic prompt
+            // Show manual install button
+            const installBtn = document.getElementById('install-btn');
+            if (installBtn) {
+                installBtn.style.display = 'block';
+            }
+        });
+        
+        // Handle manual install button click
+        document.addEventListener('DOMContentLoaded', () => {
+            const installBtn = document.getElementById('install-btn');
+            if (installBtn) {
+                installBtn.addEventListener('click', () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        deferredPrompt.userChoice.then((choiceResult) => {
+                            if (choiceResult.outcome === 'accepted') {
+                                console.log('User accepted the install prompt');
+                                installBtn.style.display = 'none';
+                            } else {
+                                console.log('User dismissed the install prompt');
+                            }
+                            deferredPrompt = null;
+                        });
+                    }
+                });
+            }
         });
         
         // Detect Android and iOS devices
