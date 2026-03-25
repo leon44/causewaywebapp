@@ -39,3 +39,14 @@ gradlew
 gradlew.bat
 *.jks
 web-manifest.json
+twa-manifest.json
+android.keystore
+store_icon.png
+manifest-checksum.txt
+
+# Build artifacts
+*.apk
+*.aab
+*.idsig
+build/
+.gradle/
