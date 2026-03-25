@@ -379,7 +379,7 @@
     <div class="container">
         <header>
             <h1>Holy Island Causeway</h1>
-            <p class="subtitle">Live Status and Future Times</p>
+            <p class="subtitle">Live Status and Upcoming Safe Crossing Times</p>
         </header>
         
         <div id="app" class="loading">
@@ -471,12 +471,19 @@
         function createTimelineBar(events) {
             if (!events || events.length === 0) return { bar: '', times: '' };
             
-            const dayStart = new Date(events[0].timestamp);
-            dayStart.setHours(0, 0, 0, 0);
-            const dayEnd = new Date(dayStart);
-            dayEnd.setHours(23, 59, 59, 999);
+            // Use UTC for all calculations to avoid DST issues
+            const firstEventTime = new Date(events[0].timestamp);
+            const dayStart = new Date(firstEventTime);
+            dayStart.setUTCHours(0, 0, 0, 0);
             
-            const totalMs = dayEnd - dayStart;
+            // Calculate next day start in UTC
+            const nextDayStart = new Date(dayStart);
+            nextDayStart.setUTCDate(nextDayStart.getUTCDate() + 1);
+            nextDayStart.setUTCHours(0, 0, 0, 0);
+            
+            // Use the actual day duration in UTC (handles 23/25 hour days due to DST)
+            const totalMs = nextDayStart - dayStart;
+            
             let barHtml = '';
             let timesHtml = '<div class="timeline-times">';
             let lastTime = dayStart;
@@ -503,7 +510,7 @@
                 currentStatus = event.status;
             }
             
-            const finalSegmentMs = dayEnd - lastTime;
+            const finalSegmentMs = nextDayStart - lastTime;
             const finalWidthPercent = (finalSegmentMs / totalMs) * 100;
             if (finalWidthPercent > 0) {
                 barHtml += `<div class="timeline-segment ${currentStatus.toLowerCase()}" style="width: ${finalWidthPercent}%"></div>`;
@@ -531,8 +538,10 @@
             
             const upcomingDaysHtml = data.upcoming_days.map(day => {
                 const dayTimeline = createTimelineBar(day.events);
+                const dateStr = new Date(day.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+                const displayText = day.name === 'Today' || day.name === 'Tomorrow' ? day.name : `${day.name} ${dateStr}`;
                 return `
-                    <div class="day-label">${day.name}</div>
+                    <div class="day-label">${displayText}</div>
                     <div class="timeline-bar">
                         ${dayTimeline.bar}
                     </div>
