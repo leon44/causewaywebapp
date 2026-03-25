@@ -1,7 +1,7 @@
 const CACHE_NAME = 'holy-island-causeway-v1';
 const urlsToCache = [
   '/',
-  '/static/favicon.png',
+  '/static/favicon_transparent.png',
   '/static/favicon2x_square.png',
   '/static/manifest.json'
 ];
