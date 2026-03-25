@@ -414,15 +414,10 @@
         // Handle PWA install prompt
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
+            // Don't prevent the default - let Chrome show the native banner
+            // Store the event for manual button if needed
             deferredPrompt = e;
-            console.log('Install prompt ready');
-            
-            // Show manual install button
-            const installBtn = document.getElementById('install-btn');
-            if (installBtn) {
-                installBtn.style.display = 'block';
-            }
+            console.log('Install prompt ready - Chrome should show native banner');
         });
         
         // Handle manual install button click
