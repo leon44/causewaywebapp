@@ -1,7 +1,7 @@
 {
-  "name": "Holy Island Causeway - Live Tide Times",
+  "name": "Holy Island Causeway - Live & Future Tide Times",
   "short_name": "Causeway",
-  "description": "Live Holy Island causeway crossing times and tide information for Lindisfarne",
+  "description": "Live and future Holy Island causeway safe crossing times and tide information for Lindisfarne",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay"],
