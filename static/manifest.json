@@ -20,7 +20,7 @@
       "src": "/static/favicon2x_square.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ],
   "categories": ["travel", "utilities", "weather"],
