@@ -2,13 +2,15 @@
   "name": "Holy Island Causeway - Live Tide Times",
   "short_name": "Causeway",
   "description": "Live Holy Island causeway crossing times and tide information for Lindisfarne",
-  "start_url": "/",
+  "startUrl": "https://holyislandtides.uk/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay"],
   "background_color": "#f5f5f7",
   "theme_color": "#34C759",
   "orientation": "portrait",
   "scope": "/",
+  "iconUrl": "https://holyislandtides.uk/static/favicon2x_square.png",
+  "host": "holyislandtides.uk",
+  "packageName": "uk.holyislandtides",
   "icons": [
     {
       "src": "/static/favicon.png",
