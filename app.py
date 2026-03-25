@@ -50,34 +50,35 @@ def get_current_status():
                 }
                 break
     
-    # Get today's and tomorrow's events for the bar charts
-    today_events = []
-    tomorrow_events = []
+    # Get events for the next 7 days
+    upcoming_days = []
     
-    now_date = now.date()
-    tomorrow_date = (now + timedelta(days=1)).date()
-    
-    for event in events:
-        event_time = datetime.fromisoformat(event['timestamp'].replace('Z', '+00:00'))
-        event_date = event_time.date()
+    for day_offset in range(7):
+        target_date = (now + timedelta(days=day_offset)).date()
+        day_events = []
         
-        if event_date == now_date:
-            today_events.append({
-                'timestamp': event['timestamp'],
-                'status': event['status']
-            })
-        elif event_date == tomorrow_date:
-            tomorrow_events.append({
-                'timestamp': event['timestamp'],
-                'status': event['status']
-            })
+        for event in events:
+            event_time = datetime.fromisoformat(event['timestamp'].replace('Z', '+00:00'))
+            event_date = event_time.date()
+            
+            if event_date == target_date:
+                day_events.append({
+                    'timestamp': event['timestamp'],
+                    'status': event['status']
+                })
+        
+        day_name = 'Today' if day_offset == 0 else 'Tomorrow' if day_offset == 1 else (now + timedelta(days=day_offset)).strftime('%A')
+        upcoming_days.append({
+            'name': day_name,
+            'date': target_date.isoformat(),
+            'events': day_events
+        })
     
     return {
         'current_status': current_status,
         'next_event': next_event,
         'next_next_event': next_next_event,
-        'today_events': today_events,
-        'tomorrow_events': tomorrow_events,
+        'upcoming_days': upcoming_days,
         'current_time': now.isoformat()
     }
 

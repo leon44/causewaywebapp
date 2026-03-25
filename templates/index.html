@@ -529,8 +529,18 @@
                 nextWindowText = `Next ${nextEvent.status === 'CLOSED' ? 'Closed' : 'Open'} Window: ${formatTimeRange(nextTime, nextNextTime)}`;
             }
             
-            const todayTimeline = createTimelineBar(data.today_events);
-            const tomorrowTimeline = createTimelineBar(data.tomorrow_events);
+            const upcomingDaysHtml = data.upcoming_days.map(day => {
+                const dayTimeline = createTimelineBar(day.events);
+                return `
+                    <div class="day-label">${day.name}</div>
+                    <div class="timeline-bar">
+                        ${dayTimeline.bar}
+                    </div>
+                    ${dayTimeline.times}
+                `;
+            }).join('');
+            
+            const todayTimeline = createTimelineBar(data.upcoming_days[0]?.events || []);
             
             const html = `
                 <div class="status-container">
@@ -550,18 +560,7 @@
                 
                 <div class="upcoming-section">
                     <div class="upcoming-title">Upcoming Days</div>
-                    <div class="day-label">Today</div>
-                    <div class="timeline-bar">
-                        ${todayTimeline.bar}
-                    </div>
-                    ${todayTimeline.times}
-                    ${tomorrowTimeline.bar ? `
-                        <div class="day-label">Tomorrow</div>
-                        <div class="timeline-bar">
-                            ${tomorrowTimeline.bar}
-                        </div>
-                        ${tomorrowTimeline.times}
-                    ` : ''}
+                    ${upcomingDaysHtml}
                     
                     <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" class="cta-button ios-only" target="_blank">
                         📱 Offline app for all future dates and notifications
