@@ -421,7 +421,7 @@
 </head>
 <body>
     <!-- iOS App Download Banner -->
-    <div id="ios-banner" class="ios-banner">
+    <div id="ios-banner" class="ios-banner hidden">
         <a href="#" class="close-btn" onclick="this.parentElement.classList.add('hidden'); return false;">&times;</a>
         <strong>📱 Get the Full Offline App:</strong> Access all future dates, get notifications, and use it completely offline - <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" target="_blank">Download for iOS</a>
     </div>
@@ -514,6 +514,11 @@
                 const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
                 if (metaTag) {
                     metaTag.remove();
+                }
+                // Hide iOS banner on Android
+                const iosBanner = document.getElementById('ios-banner');
+                if (iosBanner) {
+                    iosBanner.classList.add('hidden');
                 }
             } else if (isIOS) {
                 // Show iOS app banner for all iOS browsers
