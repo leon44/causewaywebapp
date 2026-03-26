@@ -17,6 +17,10 @@
     <meta property="og:image" content="{{ url_for('static', filename='featured.png') }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Holy Island Causeway - Live tide times and safe crossing information">
+    <meta property="og:image" content="{{ url_for('static', filename='featured.png') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     
     <!-- iOS Smart App Banner -->
     <meta name="apple-itunes-app" content="app-id=6760356995">
@@ -79,6 +83,40 @@
             color: white;
             text-decoration: underline;
             font-weight: 600;
+        }
+        
+        .ios-banner {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            color: white;
+            padding: 14px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 15px rgba(139, 92, 246, 0.3);
+            border-bottom: 2px solid #6D28D9;
+        }
+        
+        .ios-banner.hidden {
+            display: none;
+        }
+        
+        .ios-banner a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        .ios-banner .close-btn {
+            float: right;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 1;
+            margin-left: 10px;
+        }
+        
+        .ios-banner .close-btn:hover {
+            color: white;
         }
         
         .container {
@@ -382,6 +420,12 @@
     </style>
 </head>
 <body>
+    <!-- iOS App Download Banner -->
+    <div id="ios-banner" class="ios-banner">
+        <a href="#" class="close-btn" onclick="this.parentElement.classList.add('hidden'); return false;">&times;</a>
+        <strong>📱 Get the Full Offline App:</strong> Access all future dates, get notifications, and use it completely offline - <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" target="_blank">Download for iOS</a>
+    </div>
+    
     <div class="container">
         <header>
             <h1>Holy Island Causeway</h1>
@@ -471,9 +515,14 @@
                 if (metaTag) {
                     metaTag.remove();
                 }
-            } else if (isIOS && isSafari) {
-                // Keep banner for Safari iOS only (iOS Smart App Banner will show instead)
-                // Keep banner for Chrome iOS and other browsers
+            } else if (isIOS) {
+                // Show iOS app banner for all iOS browsers
+                const iosBanner = document.getElementById('ios-banner');
+                if (iosBanner) {
+                    iosBanner.classList.remove('hidden');
+                }
+                
+                // Hide the regular app banner for iOS
                 const banner = document.getElementById('app-banner');
                 if (banner) {
                     banner.classList.add('hidden');
@@ -608,7 +657,7 @@
                 </div>
                 
                 <div class="disclaimer">
-                    This guidance for crossing the Causeway by car and is based on tidal data only. Local wind and rain can increase flooding even when the causeway is open. Crossing is at your own risk and we cannot accept any liability for decisions taken on the basis on inaccuracies.
+                    This guidance for crossing the Causeway by car and is based on tidal data only. Local wind and rain can increase flooding even when the causeway is open. Crossing is at your own risk and we cannot accept any liability for decisions taken on the basis of inaccuracies.
                 </div>
                 
                 <div class="upcoming-section">
