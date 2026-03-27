@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Holy Island Causeway - Safe Crossing Guide | Lindisfarne</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Everything you need to know about crossing the Holy Island causeway safely. Learn why it floods, when it's safe to cross, and how to avoid getting stranded.">
+    <meta name="keywords" content="Holy Island causeway, Lindisfarne causeway, safe crossing times, tide safety, Northumberland causeway, causeway flooding">
+    <meta name="author" content="Holy Island Tide Times">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="About the Holy Island Causeway - Safe Crossing Guide">
+    <meta property="og:description" content="Everything you need to know about crossing the Holy Island causeway safely. Learn why it floods, when it's safe to cross, and how to avoid getting stranded.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ url_for('static', filename='causeway.jpg') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Holy Island Causeway - Tidal road crossing to Lindisfarne">
+    
+    <!-- Mobile Optimization -->
+    <meta name="theme-color" content="#f5f5f7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon_square.png') }}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon_square.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon_square.png') }}" sizes="192x192">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon_square.png') }}" sizes="512x512">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon_square.png') }}">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 12px;
+            }
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            color: #86868b;
+            margin-bottom: 0;
+        }
+        
+        .causeway-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 .number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-right: 12px;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 25px 0 15px 0;
+            color: #1d1d1f;
+        }
+        
+        p {
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+        
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #856404;
+        }
+        
+        .emergency {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #721c24;
+        }
+        
+        .cta-button {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 22px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Tide Times</a>
+        
+        <header>
+            <h1>About the Holy Island Causeway</h1>
+            <p class="subtitle">Everything you need to know to cross safely</p>
+        </header>
+        
+        <img src="{{ url_for('static', filename='islandmap.jpg') }}" alt="Holy Island Map - Location and causeway crossing" class="causeway-image">
+        
+        <div class="section">
+            <h2>Where is the Causeway?</h2>
+            <p>Holy Island sits just off the Northumberland coast, around 20 minutes from the A1.</p>
+            <p>It's connected to the mainland by a 3-mile tidal road, known as the causeway.</p>
+            <ul>
+                <li>At low tide, it looks like a normal road</li>
+                <li>At high tide, it disappears completely beneath the North Sea</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Why the Causeway Floods</h2>
+            <p>The sea here rises several metres during high tide, covering large sections of the road.</p>
+            <p>Tides are caused primarily by the moon, but also the sun's gravitational pull, which means:</p>
+            <ul>
+                <li>There are two high tides per day</li>
+                <li>They occur at different times each day</li>
+                <li>The height varies depending on the relative position of the sun and the moon</li>
+            </ul>
+            <p>At high tide, the island becomes completely cut off.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Does the Weather Affect It?</h2>
+            <p>During strong winds and storms, there's a <strong>storm surge effect</strong> which can:</p>
+            <ul>
+                <li>Increase water levels beyond predicted tidal heights</li>
+                <li>Create larger waves that wash further onto the causeway</li>
+                <li>Make the road unsafe even when it should be technically safe</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>When Is It Safe to Cross?</h2>
+            <p>You should only cross during the official safe crossing times.</p>
+            <p>As these are tidal they are calculated years in advance.</p>
+            <ul>
+                <li>Tide height</li>
+                <li>Local conditions</li>
+                <li>Safety margins</li>
+            </ul>
+            
+            <div class="warning">
+                <strong>As a general rule:</strong><br>
+                The road becomes unsafe around 2 hours before high tide<br>
+                It may remain unsafe up to 3 hours after
+            </div>
+            
+            <p>But don't rely on rough estimates, always check the crossing times.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Why Cars Get Stranded</h2>
+            <p>Vehicles get caught out surprisingly often, between 10 and 20 rescues are needed by the RNLI each year, and its usually for the same reasons:</p>
+            
+            <h3>1. Leaving too late</h3>
+            <p>Drivers think "it still looks fine" and start crossing after the safe window.</p>
+            
+            <h3>2. Underestimating water depth</h3>
+            <p>Even shallow-looking water can:</p>
+            <ul>
+                <li>Flood the engine</li>
+                <li>Cause total engine failure</li>
+                <li>Leave the car stranded within minutes</li>
+            </ul>
+            
+            <h3>3. Trying to push through</h3>
+            <p>Once water is ahead and behind, there's no safe way out.</p>
+            
+            <p>If this happens, the only option is often to abandon the vehicle and wait for rescue.</p>
+            
+            <h3>4. Not reading the signs</h3>
+            <p>Some people simply don't know the risks or don't read the warning signs at the causeway entrance.</p>
+        </div>
+        
+        <img src="{{ url_for('static', filename='causeway.jpg') }}" alt="Holy Island Causeway - Tidal road crossing" class="causeway-image">
+        
+        <div class="section">
+            <h2>The Refuge Hut ("Idiot Box")</h2>
+            <p>At the mainland end of the causeway, you'll see a raised refuge shelter.</p>
+            <p>This is there for emergencies only, when people are caught by the tide and need to get out of their vehicle.</p>
+            
+            <div class="emergency">
+                <strong>If you ever need it:</strong><br>
+                Get out of the car early<br>
+                Move to the refuge<br>
+                Call 999 and ask for the Coastguard
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>How to Stay Safe</h2>
+            <p>It's simple:</p>
+            <ul>
+                <li>Only cross during official safe times</li>
+                <li>If in doubt, don't go</li>
+                <li>If water is already on the road, turn back immediately</li>
+                <li>Allow extra time in bad weather</li>
+            </ul>
+            <p>Hundreds of thousands of people visit safely every year—the problems only happen when people ignore the rules.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Important Tips</h2>
+            <ul>
+                <li>The causeway is shared with pedestrians and cyclists so please drive carefully</li>
+                <li>Water can hide potholes and debris</li>
+                <li>There are no dedicated walkways</li>
+                <li>The speed limit is 60 mph, but adjust for conditions</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Walking vs Driving</h2>
+            <p>There are two completely different ways to reach Holy Island:</p>
+            
+            <h3>1. The Causeway (Driving or Cycling)</h3>
+            <ul>
+                <li>This is the road crossing</li>
+                <li>The times shown on this site apply to this route only</li>
+                <li>Used by cars, cyclists, and some walkers</li>
+            </ul>
+            
+            <h3>2. The Pilgrim's Way (Walking Only)</h3>
+            <ul>
+                <li>A historic walking route across the sands</li>
+                <li>Marked by wooden poles</li>
+                <li>Not the same as the road</li>
+            </ul>
+            
+            <div class="emergency">
+                <strong>⚠️ Important:</strong><br>
+                The safe crossing times for the causeway do NOT apply to walking routes.
+            </div>
+            
+            <p>Walking the Pilgrim's Way requires:</p>
+            <ul>
+                <li>Different timing</li>
+                <li>Local knowledge</li>
+                <li>Awareness of fast-moving tides and shifting sands</li>
+            </ul>
+            
+            <p>If you plan to walk, you must follow separate guidance specifically for that route.</p>
+            
+            <p><strong>Walking Guide:</strong> <a href="https://holy-island.uk/how-to-walk-the-pilgrims-way-to-holy-island-minding-tide-times/" target="_blank" rel="noopener noreferrer">How to Walk the Pilgrim's Way to Holy Island</a></p>
+        </div>
+        
+        <div class="section">
+            <h2>A Final Note</h2>
+            <p>The causeway is not just a road, it's part of what makes Holy Island special.</p>
+            <p>Plan ahead, respect the tide, and you'll experience one of the most memorable crossings in the UK.</p>
+        </div>
+        
+        <a href="/" class="cta-button">Check Current Tide Times</a>
+        
+        <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" class="cta-button" target="_blank">
+            📱 Get the Full Offline App for All Future Dates
+        </a>
+    </div>
+    
+    <footer>
+        <p style="font-size: 12px;">
+            <a href="/about-causeway" style="color: #667eea; text-decoration: none; margin-right: 15px;">About the Causeway</a>
+            <a href="/privacy" style="color: #667eea; text-decoration: none; margin-right: 15px;">Privacy Policy</a>
+            <a href="/support" style="color: #667eea; text-decoration: none; margin-right: 15px;">Support</a>
+            <a href="/about" style="color: #667eea; text-decoration: none;">About the Developer</a>
+        </p>
+    </footer>
+</body>
+</html>

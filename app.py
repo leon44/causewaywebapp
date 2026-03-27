@@ -102,10 +102,15 @@ def about():
     """Serve the about page"""
     return render_template('about.html')
 
+@app.route('/about-causeway')
+def about_causeway():
+    """Serve the about causeway page"""
+    return render_template('about_causeway.html')
+
 @app.route('/api/status')
 def api_status():
     """API endpoint for current status"""
     return jsonify(get_current_status())
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
