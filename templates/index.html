@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holy Island Causeway - Live & Future Tide Times & Safe Crossing Times | Lindisfarne</title>
+    <title>Holy Island Tide Times - Live & Future Causeway Safe Crossing Times | Lindisfarne</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Live and future Holy Island causeway safe crossing times and tide information for Lindisfarne. Check if the causeway is open or closed right now with real-time countdown timer.">
+    <meta name="description" content="Real time and future Holy Island tide times and causeway information for Lindisfarne. Get the new app and check if the causeway is open or closed right now with real-time countdown timer.">
     <meta name="keywords" content="Holy Island tide times, Lindisfarne crossing times, Holy Island causeway, causeway crossing times, Lindisfarne tide times, Holy Island safe crossing times, future tide times, Northumberland causeway, safe crossing times">
-    <meta name="author" content="Holy Island Crossing Times">
+    <meta name="author" content="Holy Island Tide Times">
     
     <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Holy Island Causeway - Live & Future Safe Crossing Times">
+    <meta property="og:title" content="Holy Island Tide Times - Live & Future Causeway Safe Crossing Times">
     <meta property="og:description" content="Check if the Holy Island causeway is open or closed right now. Live and future tide times for safe crossing to Lindisfarne.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{{ url_for('static', filename='featured.png') }}">
@@ -385,6 +385,46 @@
             transform: translateY(-1px);
         }
         
+        .about-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .about-box h3 {
+            color: #0c4a6e;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .about-box p {
+            color: #0c4a6e;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .about-box a {
+            display: inline-block;
+            background: #0ea5e9;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        
+        .about-box a:hover {
+            background: #0284c7;
+            transform: translateY(-1px);
+        }
+        
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -428,8 +468,8 @@
     
     <div class="container">
         <header>
-            <h1>Holy Island Causeway</h1>
-            <p class="subtitle">Live Status and Upcoming Safe Crossing Times</p>
+            <h1>Holy Island Tide Times</h1>
+            <p class="subtitle">Live Status and Upcoming Safe Causeway Crossing Times</p>
         </header>
         
         <div id="app" class="loading">
@@ -661,8 +701,10 @@
                     ${nextWindowText ? `<div class="next-window">${nextWindowText}</div>` : ''}
                 </div>
                 
-                <div class="disclaimer">
-                    This guidance for crossing the Causeway by car and is based on tidal data only. Local wind and rain can increase flooding even when the causeway is open. Crossing is at your own risk and we cannot accept any liability for decisions taken on the basis of inaccuracies.
+                <div class="about-box">
+                    <h3>🌊 About the Causeway</h3>
+                    <p>Learn everything you need to know about crossing safely. Why it floods, when it's safe, and how to avoid getting stranded.</p>
+                    <a href="/about-causeway">Read Safety Guide</a>
                 </div>
                 
                 <div class="upcoming-section">
@@ -676,10 +718,10 @@
                     <a href="https://holyislandcrossingtimes.northumberland.gov.uk/" class="external-link" target="_blank" rel="noopener noreferrer">
                         All Crossing Times from Northumberland County Council →
                     </a>
-                    
-                    <a href="https://holy-island.uk/crossing-holy-islands-causeway-and-what-you-need-to-know/" class="external-link android-hidden" target="_blank" rel="noopener noreferrer">
-                        General Causeway Info →
-                    </a>
+                </div>
+                
+                <div class="disclaimer">
+                    This guidance for crossing the Causeway by car and is based on tidal data only. Local wind and rain can increase flooding even when the causeway is open. Crossing is at your own risk and we cannot accept any liability for decisions taken on the basis of inaccuracies.
                 </div>
             `;
             
@@ -724,12 +766,11 @@
         <p style="margin-bottom: 12px;">Indicated times are for driving across the causeway by car, which takes around 10 minutes.</p>
         
         <p style="margin-bottom: 12px;">Times are based on official data from Northumberland County Council. Always exercise caution when crossing the causeway.</p>
-        
-        <p style="margin-bottom: 12px;">This app provides safe crossing times based on tide predictions only. Weather conditions including high winds, heavy rain, fog, or storms can significantly affect the safety of crossing even during published safe times. Never attempt to cross if conditions appear dangerous, regardless of tide times. Always check current weather forecasts and observe local conditions before crossing.</p>
-        
-        <p style="margin-bottom: 16px;">In an emergency, call 999 immediately.</p>
+                
+        <p style="margin-bottom: 16px;">In an emergency, call 999 and ask for the Coastguard.</p>
         
         <p style="margin-top: 20px; font-size: 12px;">
+            <a href="/about-causeway" style="color: #667eea; text-decoration: none; margin-right: 15px;">About the Causeway</a>
             <a href="/privacy" style="color: #667eea; text-decoration: none; margin-right: 15px;">Privacy Policy</a>
             <a href="/support" style="color: #667eea; text-decoration: none; margin-right: 15px;">Support</a>
             <a href="/about" style="color: #667eea; text-decoration: none;">About the Developer</a>
