@@ -182,6 +182,28 @@
             display: none;
         }
         
+        .android .non-android-about-section {
+            display: none;
+        }
+        
+        .non-android-about-section {
+            display: block;
+        }
+        
+        .android-about-section {
+            display: none;
+        }
+        
+        .android .android-about-section {
+            display: block;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            padding: 30px 15px;
+            border-bottom: 1px solid #e5e5e7;
+        }
+        
         .android footer {
             padding: 20px 15px;
             background: white;
@@ -703,7 +725,7 @@
                     ${nextWindowText ? `<div class="next-window">${nextWindowText}</div>` : ''}
                 </div>
                 
-                <div class="about-box">
+                <div class="about-box non-android-about-section">
                     <h3>🌊 About the Causeway</h3>
                     <p>Learn everything you need to know about crossing safely. Why it floods, when it's safe, and how to avoid getting stranded.</p>
                     <a href="/about-causeway">Read Safety Guide</a>
@@ -720,6 +742,12 @@
                     <a href="https://holyislandcrossingtimes.northumberland.gov.uk/" class="external-link" target="_blank" rel="noopener noreferrer">
                         All Crossing Times from Northumberland County Council →
                     </a>
+                </div>
+                
+                <div class="about-box android-about-section">
+                    <h3>🌊 About the Causeway</h3>
+                    <p>Learn everything you need to know about crossing safely. Why it floods, when it's safe, and how to avoid getting stranded.</p>
+                    <a href="/about-causeway">Read Safety Guide</a>
                 </div>
                 
                 <div class="disclaimer">
