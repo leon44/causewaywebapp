@@ -121,6 +121,27 @@
             color: white;
         }
         
+        .app-download-btn-image {
+            display: block;
+            margin: 15px auto 25px;
+            max-width: 200px;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+            opacity: 0.9;
+        }
+        
+        .app-download-btn-image:hover {
+            transform: translateY(-2px);
+        }
+        
+        .app-download-btn-image:active {
+            transform: translateY(0);
+        }
+        
+        .android .app-download-btn-image {
+            display: none;
+        }
+        
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -495,6 +516,10 @@
             <h1>Holy Island Tide Times</h1>
             <p class="subtitle">Live Status and Upcoming Safe Causeway Crossing Times</p>
         </header>
+        
+        <a href="https://apps.apple.com/nl/app/holy-island-crossing-times/id6760356995" target="_blank" class="app-download-btn-image">
+            <img src="{{ url_for('static', filename='Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg') }}" alt="Download on the App Store" style="width: 100%; height: auto; display: block;">
+        </a>
         
         <div id="app" class="loading">
             Loading tide information...
