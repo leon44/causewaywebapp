@@ -203,6 +203,14 @@
             text-decoration: underline;
         }
         
+        .in-app .back-link {
+            display: none;
+        }
+        
+        .in-app header {
+            display: none;
+        }
+        
         @media (max-width: 480px) {
             h1 {
                 font-size: 22px;
@@ -219,6 +227,17 @@
     </style>
 </head>
 <body>
+    <script>
+        // Detect if we're running in the app's webkit
+        (function() {
+            const userAgent = navigator.userAgent;
+            const isInApp = userAgent.includes('HolyIslandTides') && userAgent.includes('Mobile');
+            
+            if (isInApp) {
+                document.body.classList.add('in-app');
+            }
+        })();
+    </script>
     <div class="container">
         <a href="/" class="back-link">← Back to Tide Times</a>
         
