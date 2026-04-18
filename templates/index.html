@@ -506,10 +506,10 @@
 </head>
 <body>
     <!-- iOS App Download Banner -->
-    <div id="ios-banner" class="ios-banner hidden">
+    <!-- <div id="ios-banner" class="ios-banner hidden">
         <a href="#" class="close-btn" onclick="this.parentElement.classList.add('hidden'); return false;">&times;</a>
-        <strong>📱 Get the Full Offline App:</strong> Access all future dates, get notifications, and use it completely offline - <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" target="_blank">Download for iOS</a>
-    </div>
+        <strong>📱 Get the Full Offline App:</strong> Access times up to 2030, get notifications, and use it completely offline - <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" target="_blank">Download for iOS</a>
+    </div> -->
     
     <div class="container">
         <header>
@@ -517,18 +517,27 @@
             <p class="subtitle">Live Status and Upcoming Safe Causeway Crossing Times</p>
         </header>
         
-        <a href="https://apps.apple.com/nl/app/holy-island-crossing-times/id6760356995" target="_blank" class="app-download-btn-image">
-            <img src="{{ url_for('static', filename='Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg') }}" alt="Download on the App Store" style="width: 100%; height: auto; display: block;">
-        </a>
+        
+        <!-- Official App Download Section -->
+        <div class="official-app-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 25px; margin-bottom: 20px; text-align: center; box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);">
+            <h3 style="color: white; font-size: 18px; font-weight: 600; margin-bottom: 12px;">Play Store App Now Available</h3>
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; margin-bottom: 20px; line-height: 1.4;">
+                Access times up to 2030, receive notifications, and use the app completely offline.
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <a href="https://apps.apple.com/nl/app/holy-island-crossing-times/id6760356995" target="_blank" style="text-decoration: none; transition: transform 0.2s ease;">
+                    <img src="{{ url_for('static', filename='Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg') }}" alt="Download on the App Store" style="width: 140px; height: auto; display: block;">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=uk.holyislandtides.twa&hl=en_GB" target="_blank" style="text-decoration: none; transition: transform 0.2s ease;">
+                    <img src="{{ url_for('static', filename='GetItOnGooglePlay_Badge_Web_color_English.png') }}" alt="Get it on Google Play" style="width: 140px; height: auto; display: block;">
+                </a>
+            </div>
+        </div>
         
         <div id="app" class="loading">
             Loading tide information...
         </div>
         
-        <!-- Manual PWA Install Button (hidden by default) -->
-        <button id="install-btn" style="display: none; position: fixed; bottom: 20px; right: 20px; background: #34C759; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);">
-            Install App
-        </button>
     </div>
     
     <script>
@@ -550,45 +559,6 @@
             console.log('Service Worker not supported');
         }
         
-        // Handle PWA install prompt
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Don't prevent the default - let Chrome show the native banner
-            // Store the event for manual button if needed
-            deferredPrompt = e;
-            console.log('Install prompt ready - Chrome should show native banner');
-            
-            // Show manual install button for Android as backup
-            const isAndroid = /Android/.test(navigator.userAgent);
-            if (isAndroid) {
-                const installBtn = document.getElementById('install-btn');
-                if (installBtn) {
-                    installBtn.style.display = 'block';
-                    console.log('Showing manual install button for Android');
-                }
-            }
-        });
-        
-        // Handle manual install button click
-        document.addEventListener('DOMContentLoaded', () => {
-            const installBtn = document.getElementById('install-btn');
-            if (installBtn) {
-                installBtn.addEventListener('click', () => {
-                    if (deferredPrompt) {
-                        deferredPrompt.prompt();
-                        deferredPrompt.userChoice.then((choiceResult) => {
-                            if (choiceResult.outcome === 'accepted') {
-                                console.log('User accepted the install prompt');
-                                installBtn.style.display = 'none';
-                            } else {
-                                console.log('User dismissed the install prompt');
-                            }
-                            deferredPrompt = null;
-                        });
-                    }
-                });
-            }
-        });
         
         // Detect Android and iOS devices
         (function() {
@@ -760,9 +730,6 @@
                     <div class="upcoming-title">Upcoming Days</div>
                     ${upcomingDaysHtml}
                     
-                    <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" class="cta-button ios-only" target="_blank">
-                        📱 Offline app for all future dates and notifications
-                    </a>
                     
                     <a href="https://holyislandcrossingtimes.northumberland.gov.uk/" class="external-link" target="_blank" rel="noopener noreferrer">
                         All Crossing Times from Northumberland County Council →
