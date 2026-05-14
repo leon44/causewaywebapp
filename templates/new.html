@@ -46,6 +46,9 @@
     }
     </script>
     
+    <!-- iOS Smart App Banner -->
+    <meta name="apple-itunes-app" content="app-id=6760356995">
+
     <!-- Mobile Optimization -->
     <meta name="theme-color" content="#f5f5f7">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -67,6 +70,69 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        .android-banner {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .android-banner.visible {
+            display: flex;
+        }
+
+        .android-banner-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .android-banner-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .android-banner-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .android-banner-sub {
+            font-size: 12px;
+            color: #86868b;
+        }
+
+        .android-banner-get {
+            background: #34C759;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 7px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .android-banner-close {
+            background: none;
+            border: none;
+            color: #86868b;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0 4px;
+            flex-shrink: 0;
+            line-height: 1;
         }
         
         body {
@@ -751,6 +817,17 @@
     </style>
 </head>
 <body>
+    <!-- Android app banner -->
+    <div class="android-banner" id="android-banner">
+        <button class="android-banner-close" onclick="dismissAndroidBanner()" aria-label="Close">×</button>
+        <img class="android-banner-icon" src="{{ url_for('static', filename='favicon_transparent.png') }}" alt="App icon">
+        <div class="android-banner-text">
+            <div class="android-banner-title">Holy Island Crossing Times</div>
+            <div class="android-banner-sub">Free · Offline alerts & times to 2030</div>
+        </div>
+        <a class="android-banner-get" href="https://play.google.com/store/apps/details?id=uk.holyislandtides.twa&hl=en_GB" target="_blank">GET</a>
+    </div>
+
     <header>
         <div class="container">
             <div class="header-content">
@@ -1383,6 +1460,20 @@
                 renderUpcomingDays(allUpcomingDays.slice(1, count + 1));
             }, 150);
         });
+
+        // Android app banner
+        (function() {
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            const dismissed = sessionStorage.getItem('androidBannerDismissed');
+            if (isAndroid && !dismissed) {
+                document.getElementById('android-banner').classList.add('visible');
+            }
+        })();
+
+        function dismissAndroidBanner() {
+            sessionStorage.setItem('androidBannerDismissed', '1');
+            document.getElementById('android-banner').classList.remove('visible');
+        }
 
         // Initial load
         populateMonthDropdown();
