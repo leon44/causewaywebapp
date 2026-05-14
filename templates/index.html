@@ -263,6 +263,14 @@
             margin-bottom: 20px;
         }
         
+        .status-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
         .status-circle {
             width: 200px;
             height: 200px;
@@ -710,6 +718,7 @@
             
             const html = `
                 <div class="status-container">
+                    <h3 class="status-title">Current Status</h3>
                     <div class="status-circle ${isOpen ? 'open' : 'closed'}">
                         ${statusText}
                     </div>

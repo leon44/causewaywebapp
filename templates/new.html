@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Island Crossing Times — Live Causeway Status & Tide Times | Lindisfarne</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Live Holy Island causeway status — open or closed right now. Real-time tide times for Lindisfarne, Northumberland. See safe crossing windows up to 2030 and get notified with the free app.">
+    <meta name="keywords" content="Holy Island tide times, Holy Island crossing times, Lindisfarne tide times, Lindisfarne crossing times, Holy Island causeway, Holy Island causeway status, causeway open closed, HolyIsland, Northumberland tide times, Northumberland causeway, safe crossing times, Lindisfarne causeway, tidal causeway, Holy Island tides, causeway status live, holy island open, lindisfarne open, is the causeway open">
+    <meta name="author" content="Holy Island Crossing Times">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://holyislandtides.uk/">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Holy Island Crossing Times — Live Causeway Status & Tide Times">
+    <meta property="og:description" content="Is the Holy Island causeway open right now? Live crossing status, real-time tide times and safe crossing windows for Lindisfarne, Northumberland.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ url_for('static', filename='featured.png') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Holy Island Crossing Times — Live causeway status and tide times for Lindisfarne">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Holy Island Crossing Times — Live Causeway Status & Tide Times">
+    <meta name="twitter:description" content="Is the Holy Island causeway open right now? Live crossing status and tide times for Lindisfarne, Northumberland.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='featured.png') }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Holy Island Crossing Times",
+      "description": "Live Holy Island causeway status and tide times for Lindisfarne, Northumberland. Real-time open/closed status with countdown and safe crossing windows.",
+      "url": "https://holyislandtides.uk/",
+      "applicationCategory": "TravelApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0" },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Holy Island Causeway, Lindisfarne, Northumberland, UK",
+        "geo": { "@type": "GeoCoordinates", "latitude": 55.6722, "longitude": -1.7986 }
+      }
+    }
+    </script>
+    
+    <!-- Mobile Optimization -->
+    <meta name="theme-color" content="#f5f5f7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon_transparent.png') }}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon_transparent.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon_transparent.png') }}" sizes="192x192">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon_transparent.png') }}" sizes="512x512">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon_transparent.png') }}">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .site-title h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 4px;
+        }
+        
+        .site-title p {
+            font-size: 14px;
+            color: #86868b;
+        }
+
+        .site-title p.header-updated {
+            font-size: 10px;
+            color: #c7c7cc;
+            margin-top: 2px;
+        }
+        
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #86868b;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #007AFF;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #0056CC;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+        
+        /* Status Section */
+        .status-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 6px solid #34C759;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .status-section.closed {
+            border-left-color: #FF3B30;
+        }
+
+        .status-section.closing-soon {
+            border-left-color: #FF9500;
+        }
+        
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .status-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #86868b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .weather-widget {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .weather-main {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .weather-icon {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .weather-temp {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .weather-sun {
+            font-size: 12px;
+            color: #86868b;
+            font-weight: 500;
+        }
+        
+        .status-large {
+            font-size: 48px;
+            font-weight: 700;
+            color: #34C759;
+            margin-bottom: 15px;
+        }
+        
+        .status-large.closed {
+            color: #FF3B30;
+        }
+        
+        .status-time {
+            font-size: 18px;
+            font-weight: 500;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+        }
+        
+        .status-divider {
+            border: none;
+            border-top: 1px solid #f0f0f0;
+            margin: 0 0 20px;
+        }
+
+        .status-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .status-detail {
+            text-align: center;
+        }
+        
+        .status-detail-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .status-detail-label {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 4px;
+        }
+        
+        .status-detail-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        
+        /* Warning Banner */
+        .warning-banner {
+            background: #FFF3CD;
+            border: 2px solid #FFC107;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .warning-icon {
+            font-size: 32px;
+            color: #FF9800;
+            flex-shrink: 0;
+        }
+        
+        .warning-content {
+            flex: 1;
+        }
+        
+        .warning-content p {
+            font-size: 16px;
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        
+        .warning-button {
+            background: #FF9800;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+            transition: background 0.2s ease;
+        }
+        
+        .warning-button:hover {
+            background: #F57C00;
+        }
+        
+        /* Today's Times */
+        .todays-times {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        
+        .section-date {
+            font-size: 16px;
+            color: #86868b;
+        }
+        
+        .timeline-container {
+            margin-bottom: 20px;
+        }
+        
+        .timeline-bar {
+            height: 60px;
+            background: #f5f5f7;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            position: relative;
+            display: flex;
+            cursor: pointer;
+        }
+        
+        .timeline-segment {
+            height: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0;
+            color: white;
+            position: relative;
+        }
+
+        .timeline-segment.no-text::after {
+            display: none;
+        }
+
+        .segments-visible .timeline-segment {
+            font-size: 14px;
+        }
+
+        .segments-visible .timeline-segment.no-text {
+            font-size: 0;
+        }
+
+        .segments-visible .timeline-segment.no-text::after {
+            display: block;
+        }
+
+        .timeline-segment.open {
+            background: #34C759;
+        }
+
+        .timeline-segment.closed {
+            background: #FF3B30;
+        }
+
+        .timeline-segment.no-text::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .timeline-times {
+            position: relative;
+            height: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-time {
+            position: absolute;
+            font-size: 14px;
+            color: #1d1d1f;
+            font-weight: 500;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        
+        .timeline-note {
+            font-size: 14px;
+            color: #86868b;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        /* Upcoming Days */
+        .upcoming-days {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .day-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .day-item:last-child {
+            border-bottom: none;
+        }
+        
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .day-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        
+        .day-expand {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #86868b;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .day-expand.expanded {
+            transform: rotate(180deg);
+        }
+        
+        .day-timeline {
+            height: 40px;
+            background: #f5f5f7;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            position: relative;
+            display: flex;
+            cursor: pointer;
+        }
+
+        .day-detail {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .day-detail.visible {
+            display: block;
+        }
+
+        .period-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 14px;
+            border-radius: 9px;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .period-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .period-open {
+            background: #e8f8ec;
+            color: #1a7a36;
+        }
+
+        .period-closed {
+            background: #fde8e8;
+            color: #b32020;
+        }
+
+        .period-icon {
+            font-size: 15px;
+            font-weight: 700;
+            width: 18px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .period-status {
+            font-weight: 700;
+            min-width: 62px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .period-time {
+            font-variant-numeric: tabular-nums;
+            font-weight: 500;
+        }
+        
+        .view-full-table {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            color: #007AFF;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.2s ease;
+        }
+
+        .expand-btn:hover {
+            color: #0056CC;
+        }
+
+        .month-select {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1d1d1f;
+            border: 1px solid #d1d1d6;
+            border-radius: 8px;
+            padding: 6px 28px 6px 10px;
+            background: white;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2386868b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+        }
+
+        .month-select:focus {
+            outline: none;
+            border-color: #007AFF;
+        }
+        
+        /* Footer Sections */
+        .footer-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .footer-section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-section-icon {
+            font-size: 24px;
+            color: #007AFF;
+        }
+        
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        
+        .footer-section p {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+        
+        .footer-section li {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .footer-section li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #34C759;
+            font-weight: bold;
+        }
+        
+        .footer-section a {
+            color: #007AFF;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #0056CC;
+        }
+        
+        .app-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .app-button {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+        
+        .app-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .app-button img {
+            height: 40px;
+            width: auto;
+        }
+        
+        /* Main Footer */
+        footer {
+            background: white;
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        footer p {
+            font-size: 13px;
+            color: #86868b;
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .status-details {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .status-large {
+                font-size: 36px;
+            }
+            
+            .warning-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .status-section,
+            .todays-times,
+            .upcoming-days,
+            .footer-section {
+                padding: 20px;
+            }
+            
+            .status-large {
+                font-size: 32px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="{{ url_for('static', filename='favicon_transparent.png') }}" alt="Holy Island Causeway Logo">
+                    </div>
+                    <div class="site-title">
+                        <h1>Holy Island Crossing Times</h1>
+                        <p>Live crossing status and tide times</p>
+                        <p class="header-updated" id="last-updated"><i class="fa-regular fa-clock" style="margin-right:4px;"></i>Updated 19:42</p>
+                    </div>
+                </div>
+                <nav class="nav-links" style="flex-direction:column;align-items:flex-end;gap:8px;">
+                    <div style="display:flex;gap:12px;align-items:center;">
+                        <a href="https://apps.apple.com/il/app/holy-island-crossing-times/id6760356995" target="_blank" style="display:flex;align-items:center;">
+                            <img src="{{ url_for('static', filename='Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg') }}" alt="Download on the App Store" style="height:32px;width:auto;display:block;">
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=uk.holyislandtides.twa&hl=en_GB" target="_blank" style="display:flex;align-items:center;">
+                            <img src="{{ url_for('static', filename='GetItOnGooglePlay_Badge_Web_color_English.png') }}" alt="Get it on Google Play" style="height:32px;width:auto;display:block;">
+                        </a>
+                    </div>
+                    <p style="font-size:10px;color:#86868b;margin:0;text-align:right;">Get the app for offline alerts and times up to 2030.</p>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Causeway Status Section -->
+            <section class="status-section" id="status-section">
+                <div class="status-header">
+                    <h2>CAUSEWAY STATUS</h2>
+                    <div class="weather-widget" id="weather-widget" style="display:none;">
+                        <div class="weather-main">
+                            <span class="weather-icon" id="weather-icon"></span>
+                            <span class="weather-temp" id="weather-temp"></span>
+                        </div>
+                        <span class="weather-sun" id="weather-sun"></span>
+                    </div>
+                </div>
+                <div class="status-large" id="status-text">OPEN</div>
+                <div class="status-time" id="safe-until">Safe to cross until 22:40</div>
+                <hr class="status-divider">
+                <div class="status-details">
+                    <div class="status-detail">
+                        <div class="status-detail-label" id="countdown-label">Closes in</div>
+                        <div class="status-detail-value" id="countdown"><i class="fa-regular fa-clock" style="font-size:0.85em;margin-right:6px;opacity:0.6;"></i><span id="countdown-text">3h 56m</span></div>
+                    </div>
+                    <div class="status-detail">
+                        <div class="status-detail-label" id="next-closure-heading">NEXT CLOSURE</div>
+                        <div class="status-detail-value" id="next-closure">22:40 - 02:50</div>
+                        <div class="status-detail-label" id="next-closure-label">Tonight</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Warning Banner -->
+            <section class="warning-banner">
+                <div class="warning-icon">⚠️</div>
+                <div class="warning-content">
+                    <p>This guidance for crossing the Causeway by car and is based on tidal data only. Local wind and rain can increase flooding even when the causeway is open. Crossing is at your own risk and we cannot accept any liability for decisions taken on the basis of inaccuracies.</p>
+                    <a href="/about-causeway" class="warning-button">Read Causeway Safety Information</a>
+                </div>
+            </section>
+
+            <!-- Today's Crossing Times -->
+            <section class="todays-times">
+                <div class="section-header">
+                    <h2 class="section-title">Today's crossing times</h2>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div class="section-date" id="today-date">Saturday 17 May</div>
+                        <button class="day-expand expanded" id="today-expand" onclick="toggleTodayDetail()">▼</button>
+                    </div>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-bar segments-visible" id="today-timeline" onclick="toggleTodayDetail()">
+                        <!-- Timeline segments will be populated by JavaScript -->
+                    </div>
+                    <div class="timeline-times" id="today-times">
+                        <!-- Time markers will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="day-detail visible" id="today-detail"></div>
+                <p class="timeline-note">Safe to cross during OPEN periods only.</p>
+            </section>
+
+            <!-- Upcoming Days -->
+            <section class="upcoming-days">
+                <div class="section-header">
+                    <h2 class="section-title">Upcoming safe crossing times</h2>
+                    <select class="month-select" id="month-select" onchange="selectMonth(this.value)">
+                        <option value="">Next few days</option>
+                    </select>
+                </div>
+                <div id="upcoming-days-list">
+                    <!-- Upcoming days will be populated by JavaScript -->
+                </div>
+                <div class="view-full-table" id="expand-row">
+                    <button class="expand-btn" id="expand-btn" onclick="toggleExpand()">View next 2 weeks →</button>
+                </div>
+            </section>
+
+            <!-- Footer Sections -->
+            <div class="footer-sections">
+                <!-- About the Developer -->
+                <div class="footer-section">
+                    <div class="footer-section-header">
+                        <div class="footer-section-icon"><i class="fa-solid fa-laptop"></i></div>
+                        <h3>About the Developer</h3>
+                    </div>
+                    <p>This site and app are independently made by a solo developer passionate about Holy Island.</p>
+                    <a href="/about">Learn more →</a>
+                </div>
+
+                <!-- Stay Safe -->
+                <div class="footer-section">
+                    <div class="footer-section-header">
+                        <div class="footer-section-icon"><i class="fa-solid fa-car"></i></div>
+                        <h3>Stay safe</h3>
+                    </div>
+                    <ul>
+                        <li>Check the tide times in advance</li>
+                        <li>Leave plenty time</li>
+                        <li>Observe official signage</li>
+                    </ul>
+                    <a href="/about-causeway">Safety guide →</a>
+                </div>
+
+                <!-- Get the App -->
+                <div class="footer-section">
+                    <div class="footer-section-header">
+                        <div class="footer-section-icon"><i class="fa-brands fa-app-store"></i></div>
+                        <h3>Get the app</h3>
+                    </div>
+                    <p>Offline alerts and future crossing times up to 2030.</p>
+                    <div class="app-buttons">
+                        <a href="https://apps.apple.com/nl/app/holy-island-crossing-times/id6760356995" target="_blank" class="app-button">
+                            <img src="{{ url_for('static', filename='Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg') }}" alt="Download on the App Store">
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=uk.holyislandtides.twa&hl=en_GB" target="_blank" class="app-button">
+                            <img src="{{ url_for('static', filename='GetItOnGooglePlay_Badge_Web_color_English.png') }}" alt="Get it on Google Play">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>All times are displayed in UK (London) time zone, regardless of your device's location settings.</p>
+            <p>Indicated times are for driving across the causeway by car, which takes around 10 minutes.</p>
+            <p>Times are based on official data from Northumberland County Council. Always exercise caution when crossing the causeway.</p>
+            <p>In an emergency, call 999 and ask for the Coastguard.</p>
+            <p><a href="/privacy" style="color:#86868b;">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        let countdownInterval;
+        let allUpcomingDays = [];
+        let displayMode = 'default'; // 'default' | '2weeks' | 'month'
+
+        function getTextThresholdHours() {
+            const containerPad = window.innerWidth < 480 ? 30 : 40;
+            const sectionPad = window.innerWidth < 480 ? 40 : 60;
+            const barWidth = Math.min(window.innerWidth, 1200) - containerPad - sectionPad;
+            return Math.min(6, (70 / barWidth) * 24);
+        }
+        
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-GB', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: false,
+                timeZone: 'Europe/London'
+            });
+        }
+        
+        function formatTimeRange(start, end) {
+            return `${formatTime(start)} - ${formatTime(end)}`;
+        }
+        
+        function calculateCountdown(targetTime) {
+            const now = new Date();
+            const target = new Date(targetTime);
+            const diff = target - now;
+            
+            if (diff <= 0) {
+                return '0h 0m';
+            }
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            return `${hours}h ${minutes}m`;
+        }
+        
+        function createTimelineBar(events, containerId, timesId) {
+            if (!events || events.length === 0) return;
+            
+            const container = document.getElementById(containerId);
+            const timesContainer = document.getElementById(timesId);
+            
+            if (!container || !timesContainer) return;
+            
+            // Use UTC for all calculations to avoid DST issues
+            const firstEventTime = new Date(events[0].timestamp);
+            const dayStart = new Date(firstEventTime);
+            dayStart.setUTCHours(0, 0, 0, 0);
+            
+            // Calculate next day start in UTC
+            const nextDayStart = new Date(dayStart);
+            nextDayStart.setUTCDate(nextDayStart.getUTCDate() + 1);
+            nextDayStart.setUTCHours(0, 0, 0, 0);
+            
+            // Use the actual day duration in UTC (handles 23/25 hour days due to DST)
+            const totalMs = nextDayStart - dayStart;
+            
+            let barHtml = '';
+            let timesHtml = '';
+            let lastTime = dayStart;
+            let cumulativePercent = 0;
+            
+            // Determine initial status at midnight (opposite of first event)
+            let currentStatus = events[0].status === 'OPEN' ? 'CLOSED' : 'OPEN';
+            
+            for (let i = 0; i < events.length; i++) {
+                const event = events[i];
+                const eventTime = new Date(event.timestamp);
+                const segmentMs = eventTime - lastTime;
+                const widthPercent = (segmentMs / totalMs) * 100;
+                
+                // Only draw segment if it has width
+                if (widthPercent > 0.5) { // Only show if more than 0.5%
+                    // Check if segment is too short for text (2.5 hours = 10.4% of 24 hours)
+                    const segmentDurationHours = (segmentMs / (1000 * 60 * 60));
+                    const isTooShort = segmentDurationHours < getTextThresholdHours();
+                    
+                    const segmentClass = isTooShort ? `${currentStatus.toLowerCase()} no-text` : currentStatus.toLowerCase();
+                    const segmentText = isTooShort ? '' : currentStatus;
+                    
+                    barHtml += `<div class="timeline-segment ${segmentClass}" style="width: ${widthPercent}%">${segmentText}</div>`;
+                }
+                
+                cumulativePercent += widthPercent;
+                // Always show event times
+                timesHtml += `<span class="timeline-time" style="left: ${cumulativePercent}%">${formatTime(eventTime)}</span>`;
+                
+                lastTime = eventTime;
+                currentStatus = event.status;
+            }
+            
+            const finalSegmentMs = nextDayStart - lastTime;
+            const finalWidthPercent = (finalSegmentMs / totalMs) * 100;
+            if (finalWidthPercent > 0.5) {
+                // Check if final segment is too short for text
+                const segmentDurationHours = (finalSegmentMs / (1000 * 60 * 60));
+                const isTooShort = segmentDurationHours < getTextThresholdHours();
+                
+                const segmentClass = isTooShort ? `${currentStatus.toLowerCase()} no-text` : currentStatus.toLowerCase();
+                const segmentText = isTooShort ? '' : currentStatus;
+                
+                barHtml += `<div class="timeline-segment ${segmentClass}" style="width: ${finalWidthPercent}%">${segmentText}</div>`;
+            }
+            
+            container.innerHTML = barHtml;
+            timesContainer.innerHTML = timesHtml;
+        }
+        
+        function updateUI(data) {
+            const isOpen = data.current_status === 'OPEN';
+            const nextEvent = data.next_event;
+            const nextNextEvent = data.next_next_event;
+            
+            // Update status
+            const statusSection = document.getElementById('status-section');
+            const statusText = document.getElementById('status-text');
+            const closingSoon = isOpen && nextEvent &&
+                (new Date(nextEvent.timestamp) - new Date()) < 60 * 60 * 1000;
+
+            statusSection.classList.remove('closed', 'closing-soon');
+            statusText.classList.remove('closed');
+
+            if (closingSoon) {
+                statusText.textContent = 'CLOSING SOON';
+                statusText.style.color = '#FF9500';
+                statusSection.classList.add('closing-soon');
+            } else if (isOpen) {
+                statusText.textContent = 'OPEN';
+                statusText.style.color = '#34C759';
+            } else {
+                statusText.textContent = 'CLOSED';
+                statusText.style.color = '#FF3B30';
+                statusSection.classList.add('closed');
+                statusText.classList.add('closed');
+            }
+
+            document.getElementById('countdown-label').textContent = isOpen ? 'Closes in' : 'Opens in';
+            
+            // Update safe until time
+            if (nextEvent && nextNextEvent) {
+                const safeUntil = new Date(nextEvent.timestamp);
+                document.getElementById('safe-until').textContent = 
+                    isOpen ? `Safe to cross until ${formatTime(safeUntil)}` : `Opens at ${formatTime(safeUntil)}`;
+                
+                // Update countdown
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                }
+                
+                countdownInterval = setInterval(() => {
+                    const countdownEl = document.getElementById('countdown-text');
+                    if (countdownEl) {
+                        countdownEl.textContent = calculateCountdown(nextEvent.timestamp);
+                        
+                        if (new Date() >= new Date(nextEvent.timestamp)) {
+                            fetchStatus();
+                        }
+                    }
+                }, 1000);
+                
+                // Update next closure/opening box
+                if (nextNextEvent) {
+                    const eventStart = new Date(nextEvent.timestamp);
+                    const eventEnd = new Date(nextNextEvent.timestamp);
+                    document.getElementById('next-closure-heading').textContent = isOpen ? 'NEXT CLOSURE' : 'NEXT OPENING';
+                    document.getElementById('next-closure').textContent =
+                        formatTimeRange(eventStart, eventEnd);
+                    const hour = eventStart.getHours();
+                    const label = hour >= 20 || hour < 2 ? 'Tonight' : 'Today';
+                    document.getElementById('next-closure-label').textContent = label;
+                }
+            }
+            
+            // Update today's date
+            const today = new Date();
+            const options = { weekday: 'long', day: 'numeric', month: 'short' };
+            document.getElementById('today-date').textContent = today.toLocaleDateString('en-GB', options);
+            
+            // Update last updated time
+            document.getElementById('last-updated').innerHTML = `<i class="fa-regular fa-clock" style="margin-right:4px;"></i>Updated ${formatTime(today)}`;
+            
+            // Update today's timeline
+            if (data.upcoming_days && data.upcoming_days.length > 0) {
+                createTimelineBar(data.upcoming_days[0].events, 'today-timeline', 'today-times');
+                const tomorrowFirstEvent = data.upcoming_days[1]?.events?.[0] || null;
+                document.getElementById('today-detail').innerHTML = createDayPeriods(
+                    data.upcoming_days[0].events,
+                    data.yesterday_last_event || null,
+                    tomorrowFirstEvent
+                );
+                allUpcomingDays = data.upcoming_days;
+                if (displayMode !== 'month') {
+                    const count = displayMode === '2weeks' ? 14 : 3;
+                    renderUpcomingDays(allUpcomingDays.slice(1, count + 1));
+                }
+            }
+        }
+
+        function renderUpcomingDays(days, showYear = false) {
+            const upcomingDaysList = document.getElementById('upcoming-days-list');
+            let html = '';
+            days.forEach((day, i) => {
+                const date = new Date(day.date + 'T12:00:00');
+                let dayName;
+                if (day.name === 'Today' || day.name === 'Tomorrow') {
+                    dayName = day.name;
+                } else if (showYear) {
+                    dayName = date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' });
+                } else {
+                    dayName = date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' });
+                }
+                const timeline = createDayTimeline(day.events);
+                const prevDay = i > 0 ? days[i - 1] : null;
+                const nextDay = i < days.length - 1 ? days[i + 1] : null;
+                const prevLastEvent = day.prev_last_event
+                    || (prevDay?.events?.length ? prevDay.events[prevDay.events.length - 1] : null);
+                const nextFirstEvent = day.next_first_event
+                    || (nextDay?.events?.length ? nextDay.events[0] : null);
+                html += `
+                    <div class="day-item">
+                        <div class="day-header">
+                            <div class="day-name">${dayName}</div>
+                            <button class="day-expand" onclick="toggleDay(this)">▼</button>
+                        </div>
+                        <div class="day-timeline" onclick="toggleDay(this.closest('.day-item').querySelector('.day-expand'))">
+                            ${timeline.barHtml}
+                        </div>
+                        <div class="timeline-times">${timeline.timesHtml}</div>
+                        <div class="day-detail">
+                            ${createDayPeriods(day.events, prevLastEvent, nextFirstEvent)}
+                        </div>
+                    </div>
+                `;
+            });
+            upcomingDaysList.innerHTML = html;
+        }
+
+        function toggleExpand() {
+            const btn = document.getElementById('expand-btn');
+            if (displayMode === 'default') {
+                displayMode = '2weeks';
+                btn.textContent = 'Show fewer days';
+                renderUpcomingDays(allUpcomingDays.slice(1, 15));
+            } else {
+                displayMode = 'default';
+                btn.textContent = 'View next 2 weeks →';
+                renderUpcomingDays(allUpcomingDays.slice(1, 4));
+            }
+        }
+
+        async function selectMonth(value) {
+            const expandRow = document.getElementById('expand-row');
+            if (!value) {
+                displayMode = 'default';
+                expandRow.style.display = '';
+                document.getElementById('expand-btn').textContent = 'View next 2 weeks →';
+                renderUpcomingDays(allUpcomingDays.slice(1, 4));
+                return;
+            }
+            displayMode = 'month';
+            expandRow.style.display = 'none';
+            const [year, month] = value.split('-').map(Number);
+            try {
+                const response = await fetch(`/api/month?year=${year}&month=${month}`);
+                const data = await response.json();
+                renderUpcomingDays(data.days, true);
+            } catch (error) {
+                console.error('Error fetching month data:', error);
+            }
+        }
+
+        function populateMonthDropdown() {
+            const select = document.getElementById('month-select');
+            const now = new Date();
+            let year = now.getFullYear();
+            let month = now.getMonth() + 1;
+            const endYear = 2029, endMonth = 12;
+            while (year < endYear || (year === endYear && month <= endMonth)) {
+                const option = document.createElement('option');
+                option.value = `${year}-${String(month).padStart(2, '0')}`;
+                option.textContent = new Date(year, month - 1, 1).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+                select.appendChild(option);
+                month++;
+                if (month > 12) { month = 1; year++; }
+            }
+        }
+        
+        function createDayTimeline(events) {
+            if (!events || events.length === 0) return { barHtml: '', timesHtml: '' };
+
+            const firstEventTime = new Date(events[0].timestamp);
+            const dayStart = new Date(firstEventTime);
+            dayStart.setUTCHours(0, 0, 0, 0);
+
+            const nextDayStart = new Date(dayStart);
+            nextDayStart.setUTCDate(nextDayStart.getUTCDate() + 1);
+            nextDayStart.setUTCHours(0, 0, 0, 0);
+
+            const totalMs = nextDayStart - dayStart;
+            let barHtml = '';
+            let timesHtml = '';
+            let lastTime = dayStart;
+            let cumulativePercent = 0;
+            let currentStatus = events[0].status === 'OPEN' ? 'CLOSED' : 'OPEN';
+
+            for (let i = 0; i < events.length; i++) {
+                const event = events[i];
+                const eventTime = new Date(event.timestamp);
+                const segmentMs = eventTime - lastTime;
+                const widthPercent = (segmentMs / totalMs) * 100;
+
+                if (widthPercent > 0.5) {
+                    const segmentDurationHours = segmentMs / (1000 * 60 * 60);
+                    const isTooShort = segmentDurationHours < getTextThresholdHours();
+                    const segmentClass = isTooShort ? `${currentStatus.toLowerCase()} no-text` : currentStatus.toLowerCase();
+                    const segmentText = isTooShort ? '' : currentStatus;
+                    barHtml += `<div class="timeline-segment ${segmentClass}" style="width: ${widthPercent}%">${segmentText}</div>`;
+                }
+
+                cumulativePercent += widthPercent;
+                timesHtml += `<span class="timeline-time" style="left: ${cumulativePercent}%">${formatTime(eventTime)}</span>`;
+
+                lastTime = eventTime;
+                currentStatus = event.status;
+            }
+
+            const finalSegmentMs = nextDayStart - lastTime;
+            const finalWidthPercent = (finalSegmentMs / totalMs) * 100;
+            if (finalWidthPercent > 0.5) {
+                const segmentDurationHours = finalSegmentMs / (1000 * 60 * 60);
+                const isTooShort = segmentDurationHours < getTextThresholdHours();
+                const segmentClass = isTooShort ? `${currentStatus.toLowerCase()} no-text` : currentStatus.toLowerCase();
+                const segmentText = isTooShort ? '' : currentStatus;
+                barHtml += `<div class="timeline-segment ${segmentClass}" style="width: ${finalWidthPercent}%">${segmentText}</div>`;
+            }
+
+            return { barHtml, timesHtml };
+        }
+
+        function toggleDay(button) {
+            button.classList.toggle('expanded');
+            const item = button.closest('.day-item');
+            item.querySelector('.day-detail').classList.toggle('visible');
+            item.querySelector('.day-timeline').classList.toggle('segments-visible');
+        }
+
+        function toggleTodayDetail() {
+            document.getElementById('today-expand').classList.toggle('expanded');
+            document.getElementById('today-detail').classList.toggle('visible');
+            document.getElementById('today-timeline').classList.toggle('segments-visible');
+        }
+
+        function createDayPeriods(events, prevLastEvent = null, nextFirstEvent = null) {
+            if (!events || events.length === 0) return '';
+
+            // Start from prev day's last event if available, else UTC midnight
+            let startTime, currentStatus;
+            if (prevLastEvent) {
+                startTime = new Date(prevLastEvent.timestamp);
+                currentStatus = prevLastEvent.status;
+            } else {
+                startTime = new Date(events[0].timestamp);
+                startTime.setUTCHours(0, 0, 0, 0);
+                currentStatus = events[0].status === 'OPEN' ? 'CLOSED' : 'OPEN';
+            }
+
+            // End at next day's first event if available, else UTC midnight
+            let endTime;
+            if (nextFirstEvent) {
+                endTime = new Date(nextFirstEvent.timestamp);
+            } else {
+                endTime = new Date(events[0].timestamp);
+                endTime.setUTCHours(0, 0, 0, 0);
+                endTime.setUTCDate(endTime.getUTCDate() + 1);
+            }
+
+            const periods = [];
+            let lastTime = startTime;
+            for (const event of events) {
+                const eventTime = new Date(event.timestamp);
+                periods.push({ status: currentStatus, start: new Date(lastTime), end: eventTime });
+                lastTime = eventTime;
+                currentStatus = event.status;
+            }
+            periods.push({ status: currentStatus, start: new Date(lastTime), end: endTime });
+
+            return periods.map(p => {
+                const isOpen = p.status === 'OPEN';
+                const cls = isOpen ? 'period-open' : 'period-closed';
+                const icon = isOpen ? '✓' : '✕';
+                return `<div class="period-item ${cls}">
+                    <span class="period-icon">${icon}</span>
+                    <span class="period-status">${p.status}</span>
+                    <span class="period-time">${formatTime(p.start)} – ${formatTime(p.end)}</span>
+                </div>`;
+            }).join('');
+        }
+        
+        async function fetchStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                updateUI(data);
+            } catch (error) {
+                console.error('Error fetching status:', error);
+            }
+        }
+        
+        const WMO_ICONS = {
+            0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+            45: '🌫️', 48: '🌫️',
+            51: '🌦️', 53: '🌦️', 55: '🌧️',
+            56: '🌨️', 57: '🌨️',
+            61: '🌧️', 63: '🌧️', 65: '🌧️',
+            66: '🌨️', 67: '🌨️',
+            71: '🌨️', 73: '🌨️', 75: '❄️',
+            77: '🌨️',
+            80: '🌦️', 81: '🌧️', 82: '⛈️',
+            85: '🌨️', 86: '❄️',
+            95: '⛈️', 96: '⛈️', 99: '⛈️'
+        };
+
+        async function fetchWeather() {
+            try {
+                const res = await fetch(
+                    'https://api.open-meteo.com/v1/forecast' +
+                    '?latitude=55.6722&longitude=-1.7986' +
+                    '&current=temperature_2m,weather_code' +
+                    '&daily=sunrise,sunset' +
+                    '&forecast_days=2' +
+                    '&timezone=Europe%2FLondon'
+                );
+                const data = await res.json();
+
+                const temp = Math.round(data.current.temperature_2m);
+                const icon = WMO_ICONS[data.current.weather_code] || '🌡️';
+
+                const now = new Date();
+                const sunrise = new Date(data.daily.sunrise[0]);
+                const sunset = new Date(data.daily.sunset[0]);
+                const tomorrowSunrise = data.daily.sunrise[1] ? new Date(data.daily.sunrise[1]) : null;
+                const sunLabel = now < sunrise
+                    ? `Sunrise ${formatTime(sunrise)}`
+                    : now < sunset
+                        ? `Sunset ${formatTime(sunset)}`
+                        : tomorrowSunrise
+                            ? `Sunrise ${formatTime(tomorrowSunrise)}`
+                            : `Sunset ${formatTime(sunset)}`;
+
+                document.getElementById('weather-icon').textContent = icon;
+                document.getElementById('weather-temp').textContent = `${temp}°C`;
+                document.getElementById('weather-sun').textContent = sunLabel;
+                document.getElementById('weather-widget').style.display = '';
+            } catch (e) {
+                // Silently fail — weather is non-critical
+            }
+        }
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (allUpcomingDays.length === 0 || displayMode === 'month') return;
+                createTimelineBar(allUpcomingDays[0].events, 'today-timeline', 'today-times');
+                const count = displayMode === '2weeks' ? 14 : 3;
+                renderUpcomingDays(allUpcomingDays.slice(1, count + 1));
+            }, 150);
+        });
+
+        // Initial load
+        populateMonthDropdown();
+        fetchWeather();
+        fetchStatus();
+        
+        // Refresh every minute
+        setInterval(fetchStatus, 60000);
+    </script>
+</body>
+</html>

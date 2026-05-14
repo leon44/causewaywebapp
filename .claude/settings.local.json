@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install *)",
+      "Bash(python app.py)",
+      "Bash(python3 -m pip install -r requirements.txt -q)",
+      "Bash(python3 app.py)",
+      "Bash(curl -s http://127.0.0.1:5001/api/month?year=2026)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'{len\\(d[\\\\\"days\\\\\"]\\)} days, first: {d[\\\\\"days\\\\\"][0][\\\\\"date\\\\\"]}, events: {len\\(d[\\\\\"days\\\\\"][0][\\\\\"events\\\\\"]\\)}'\\)\")",
+      "Bash(curl -s \"http://127.0.0.1:5001/api/month?year=2026&month=6\")",
+      "Bash(curl -s \"http://127.0.0.1:5001/api/status\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'upcoming_days count: {len\\(d[\\\\\"upcoming_days\\\\\"]\\)}'\\)\")",
+      "Bash(curl -s \"https://api.open-meteo.com/v1/forecast?latitude=55.6722&longitude=-1.7986&current=temperature_2m,weather_code&daily=sunrise,sunset&timezone=Europe%2FLondon\")",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('yesterday_last_event:', d.get\\('yesterday_last_event'\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); day=d['days'][0]; print\\('day:', day['date'], '| prev_last:', day['prev_last_event'], '| next_first:', day['next_first_event']\\)\")"
+    ]
+  }
+}
