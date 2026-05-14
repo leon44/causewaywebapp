@@ -1180,7 +1180,8 @@
                 document.getElementById('today-detail').innerHTML = createDayPeriods(
                     data.upcoming_days[0].events,
                     data.yesterday_last_event || null,
-                    tomorrowFirstEvent
+                    tomorrowFirstEvent,
+                    data.upcoming_days[0].date
                 );
                 allUpcomingDays = data.upcoming_days;
                 if (displayMode !== 'month') {
@@ -1221,7 +1222,7 @@
                         </div>
                         <div class="timeline-times">${timeline.timesHtml}</div>
                         <div class="day-detail">
-                            ${createDayPeriods(day.events, prevLastEvent, nextFirstEvent)}
+                            ${createDayPeriods(day.events, prevLastEvent, nextFirstEvent, day.date)}
                         </div>
                     </div>
                 `;
@@ -1344,7 +1345,7 @@
             document.getElementById('today-timeline').classList.toggle('segments-visible');
         }
 
-        function createDayPeriods(events, prevLastEvent = null, nextFirstEvent = null) {
+        function createDayPeriods(events, prevLastEvent = null, nextFirstEvent = null, dayDate = null) {
             if (!events || events.length === 0) return '';
 
             // Start from prev day's last event if available, else UTC midnight
@@ -1378,14 +1379,27 @@
             }
             periods.push({ status: currentStatus, start: new Date(lastTime), end: endTime });
 
+            // Determine the display day's date string in London time for comparison
+            const londonDateStr = d => d.toLocaleDateString('en-GB', { timeZone: 'Europe/London', day: '2-digit', month: '2-digit', year: 'numeric' });
+            const londonDayName = d => d.toLocaleDateString('en-GB', { timeZone: 'Europe/London', weekday: 'long' });
+            const refDate = dayDate
+                ? londonDateStr(new Date(dayDate + 'T12:00:00'))
+                : londonDateStr(new Date(events[0].timestamp));
+
+            const annotate = (d) => {
+                const ds = londonDateStr(d);
+                return ds !== refDate ? ` <span style="font-size:0.85em;opacity:0.75;">(${londonDayName(d)})</span>` : '';
+            };
+
             return periods.map(p => {
                 const isOpen = p.status === 'OPEN';
                 const cls = isOpen ? 'period-open' : 'period-closed';
                 const icon = isOpen ? '✓' : '✕';
+                const timeStr = `${formatTime(p.start)}${annotate(p.start)} – ${formatTime(p.end)}${annotate(p.end)}`;
                 return `<div class="period-item ${cls}">
                     <span class="period-icon">${icon}</span>
                     <span class="period-status">${p.status}</span>
-                    <span class="period-time">${formatTime(p.start)} – ${formatTime(p.end)}</span>
+                    <span class="period-time">${timeStr}</span>
                 </div>`;
             }).join('');
         }
