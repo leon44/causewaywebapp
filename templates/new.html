@@ -607,6 +607,11 @@
             color: #b32020;
         }
 
+        .period-current {
+            font-weight: 700;
+            box-shadow: inset 0 0 0 2px currentColor;
+        }
+
         .period-icon {
             font-size: 15px;
             font-weight: 700;
@@ -901,6 +906,7 @@
                         <div class="status-detail-label" id="next-closure-label"></div>
                     </div>
                 </div>
+                <p style="font-size:10px;color:#86868b;margin-top:16px;text-align:right;">Source: Northumberland County Council</p>
             </section>
 
             <!-- Warning Banner -->
@@ -1198,7 +1204,8 @@
                     data.upcoming_days[0].events,
                     data.yesterday_last_event || null,
                     tomorrowFirstEvent,
-                    data.upcoming_days[0].date
+                    data.upcoming_days[0].date,
+                    true
                 );
                 allUpcomingDays = data.upcoming_days;
                 if (displayMode !== 'month') {
@@ -1362,7 +1369,7 @@
             document.getElementById('today-timeline').classList.toggle('segments-visible');
         }
 
-        function createDayPeriods(events, prevLastEvent = null, nextFirstEvent = null, dayDate = null) {
+        function createDayPeriods(events, prevLastEvent = null, nextFirstEvent = null, dayDate = null, isToday = false) {
             if (!events || events.length === 0) return '';
 
             // Start from prev day's last event if available, else UTC midnight
@@ -1408,17 +1415,22 @@
                 return ds !== refDate ? ` <span style="font-size:0.85em;opacity:0.75;">(${londonDayName(d)})</span>` : '';
             };
 
-            return periods.map(p => {
-                const isOpen = p.status === 'OPEN';
-                const cls = isOpen ? 'period-open' : 'period-closed';
-                const icon = isOpen ? '✓' : '✕';
-                const timeStr = `${formatTime(p.start)}${annotate(p.start)} – ${formatTime(p.end)}${annotate(p.end)}`;
-                return `<div class="period-item ${cls}">
+            const now = new Date();
+            return periods
+                .filter(p => !isToday || p.end > now)
+                .map(p => {
+                    const isOpen = p.status === 'OPEN';
+                    const cls = isOpen ? 'period-open' : 'period-closed';
+                    const isCurrent = isToday && p.start <= now && now < p.end;
+                    const currentCls = isCurrent ? ' period-current' : '';
+                    const icon = isOpen ? '✓' : '✕';
+                    const timeStr = `${formatTime(p.start)}${annotate(p.start)} – ${formatTime(p.end)}${annotate(p.end)}`;
+                    return `<div class="period-item ${cls}${currentCls}">
                     <span class="period-icon">${icon}</span>
                     <span class="period-status">${p.status}</span>
                     <span class="period-time">${timeStr}</span>
                 </div>`;
-            }).join('');
+                }).join('');
         }
         
         async function fetchStatus() {
